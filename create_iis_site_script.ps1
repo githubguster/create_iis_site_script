@@ -257,9 +257,9 @@ Set-ExecutionPolicy Bypass -Scope Process
 Import-Module WebAdministration
 
 if (![string]::IsNullOrEmpty($source) -and
-    ![string]::IsNullOrEmpty($source) -and
-    ![string]::IsNullOrEmpty($source) -and
-    ![string]::IsNullOrEmpty($source)) {
+    ![string]::IsNullOrEmpty($destination) -and
+    ![string]::IsNullOrEmpty($webName) -and
+    $port -gt 0) {
     $physicalPath=(Get-Item "$source").Name
     $physicalPath="$destination\$physicalPath"
     iis_init($preloadEnable, $webSocketEnable)
