@@ -258,7 +258,7 @@ function add_firewall_rule {
         [Parameter(Mandatory=$true, Position=0)]
         [string] $name,
         [Parameter(Mandatory=$true, Position=1)]
-        [string] $ports
+        [string[]] $ports
     )
     New-NetFirewallRule -DisplayName "$name" -Direction Inbound -Protocol TCP -Profile Any -Action Allow -LocalPort $ports
 }
