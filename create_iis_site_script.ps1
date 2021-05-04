@@ -252,6 +252,26 @@ function remove_certificate {
     Get-ChildItem -Path "Cert:\LocalMachine\My" | Where-Object {$_.Subject -eq "CN=$cn"} | Remove-Item
 }
 
+function add_firewall_rule {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true, Position=0)]
+        [string] $name,
+        [Parameter(Mandatory=$true, Position=1)]
+        [string] $ports
+    )
+    New-NetFirewallRule -DisplayName "$name" -Direction Inbound -Protocol TCP -Profile Any -Action Allow -LocalPort $ports
+}
+
+function remove_firewall_rule {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true, Position=0)]
+        [string] $name
+    )
+    Remove-NetFirewallRule -DisplayName "$name"
+}
+
 # main
 Set-ExecutionPolicy Bypass -Scope Process
 Import-Module WebAdministration
